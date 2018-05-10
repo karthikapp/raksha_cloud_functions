@@ -3,6 +3,24 @@ const admin = require('firebase-admin');
 const nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 
+// Load the full build.
+var _ = require('lodash');
+// Load the core build.
+var _ = require('lodash/core');
+// Load the FP build for immutable auto-curried iteratee-first data-last methods.
+var fp = require('lodash/fp');
+ 
+// Load method categories.
+var array = require('lodash/array');
+var object = require('lodash/fp/object');
+ 
+// Cherry-pick methods for smaller browserify/rollup/webpack bundles.
+var at = require('lodash/at');
+var curryN = require('lodash/fp/curryN');
+
+
+
+
 admin.initializeApp();
 var db = admin.database();
 
@@ -46,7 +64,8 @@ exports.sendMailto = functions.database.ref('/leads/{leadId}/leadstatus')
 			{   var test = ['karthik@zingr.org']
 				presalesheadids = presalesheadids.concat(test)
 				console.log("emails now nj", presalesheadids.join())
-				var emails = presalesheadids.join()
+				var uniqemails = _.uniq(presalesheadids)
+				var emails = uniqemails.join()
 				const mailOptions = {
 				  from: 'karthik.uic@gmail.com', // sender address
 				  to: emails, // list of receivers
