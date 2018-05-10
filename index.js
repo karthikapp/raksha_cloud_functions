@@ -6,17 +6,17 @@ var smtpTransport = require('nodemailer-smtp-transport');
 // Load the full build.
 var _ = require('lodash');
 // Load the core build.
-var _ = require('lodash/core');
+//var _ = require('lodash/core');
 // Load the FP build for immutable auto-curried iteratee-first data-last methods.
-var fp = require('lodash/fp');
+// var fp = require('lodash/fp');
  
-// Load method categories.
-var array = require('lodash/array');
-var object = require('lodash/fp/object');
+// // Load method categories.
+// var array = require('lodash/array');
+// var object = require('lodash/fp/object');
  
-// Cherry-pick methods for smaller browserify/rollup/webpack bundles.
-var at = require('lodash/at');
-var curryN = require('lodash/fp/curryN');
+// // Cherry-pick methods for smaller browserify/rollup/webpack bundles.
+// var at = require('lodash/at');
+// var curryN = require('lodash/fp/curryN');
 
 admin.initializeApp();
 var db = admin.database();
@@ -60,7 +60,8 @@ exports.sendMailto = functions.database.ref('/leads/{leadId}/leadstatus')
 			}).then(val => {
 				var test = ['karthik@zingr.org']
 				presalesheadids = presalesheadids.concat(test)
-				//console.log("emails now nj", presalesheadids.join())
+				console.log("emails now nj", presalesheadids.join(),  presalesheadids )
+				console.log("12", _.uniq(presalesheadids))
 				var uniqemails = _.uniq(presalesheadids)
 				var emails = uniqemails.join()
 				const mailOptions = {
